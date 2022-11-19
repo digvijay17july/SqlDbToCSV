@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "github.com/digvijay17july/SqlDbToCSV/api"
 
-func main(){
- fmt.Print("hello world")
+func main() {
+	api.Start()
 }
