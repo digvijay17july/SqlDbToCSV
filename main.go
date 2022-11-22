@@ -9,8 +9,7 @@ import (
 
 func main() {
 	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
-	log.Info().Msg("Starting the DB Set up")
-	api.Connect()
+
 	log.Info().Msg("Starting the Http Server")
 	api.Start()
 
