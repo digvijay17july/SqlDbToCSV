@@ -17,11 +17,12 @@ const (
 )
 
 type DBConfig struct {
-	Host     string `json:"host,omitempty" validate:"required"`
-	Port     int    `json:"port,omitempty" validate:"required"`
-	User     string `json:"user,omitempty" validate:"required"`
-	Password string `json:"password,omitempty" validate:"required"`
-	Dbname   string `json:"dbname,omitempty" validate:"required"`
+	Host        string `json:"host,omitempty" validate:"required"`
+	Port        int    `json:"port,omitempty" validate:"required"`
+	User        string `json:"user,omitempty" validate:"required"`
+	Password    string `json:"password,omitempty" validate:"required"`
+	Dbname      string `json:"dbname,omitempty" validate:"required"`
+	RowsPerFile int    `json:"rowsPerFile,omitempty" validate:"required"`
 }
 
 var dbConfig DBConfig
@@ -64,7 +65,7 @@ func CheckError(err error) {
 
 func ListRecords(page int, tableName string, count int) [][]string {
 
-	limit := 10
+	limit := dbConfig.RowsPerFile
 	offset := limit * (page - 1)
 	SQL := `SELECT * FROM ` + tableName + ` LIMIT $2 OFFSET $1`
 	rows, err := db.Query(SQL, offset, limit)
